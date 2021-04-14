@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import s from "./ContactForm.module.css";
+// import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 
 class ContactForm extends Component {
@@ -10,6 +11,8 @@ class ContactForm extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
+    // this.props.onSubmitForm(this.state);
+    // this.reset();
 
     const { name, number } = this.state;
 
@@ -84,5 +87,10 @@ class ContactForm extends Component {
     );
   }
 }
+
+// ContactForm.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   number: PropTypes.string.isRequired,
+// };
 
 export default ContactForm;

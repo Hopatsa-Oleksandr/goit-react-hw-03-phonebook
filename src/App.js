@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import ContactForm from './Components/ContactForm';
-import ContactList from './Components/ContactList';
-import Filter from './Components/Filter';
-import s from './App.module.css';
+import React, { Component } from "react";
+import ContactForm from "./Components/ContactForm";
+import ContactList from "./Components/ContactList";
+
+import Filter from "./Components/Filter";
+import s from "./App.module.css";
 
 class App extends Component {
   state = {
     contacts: [],
-    filter: '',
+    filter: "",
   };
 
-    componentDidMount() {
-    const checkStorage = localStorage.getItem('contacts');
+  componentDidMount() {
+    const checkStorage = localStorage.getItem("contacts");
     if (checkStorage) {
       this.setState({ contacts: JSON.parse(checkStorage) });
     }
@@ -20,32 +21,32 @@ class App extends Component {
   componentDidUpdate(prevState) {
     const { contacts } = this.state;
     if (contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
+      localStorage.setItem("contacts", JSON.stringify(contacts));
     }
   }
 
-  handleSubmit = newContact => {
+  handleSubmit = (newContact) => {
     const { id, name, number } = newContact;
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       contacts: [...prevState.contacts, { id, name, number }],
     }));
   };
 
   getVisibleContacts = () => {
     const value = this.state.filter;
-    return this.state.contacts.filter(el =>
-      el.name.toLowerCase().includes(value.toLowerCase()),
+    return this.state.contacts.filter((el) =>
+      el.name.toLowerCase().includes(value.toLowerCase())
     );
   };
 
-  changeInput = evt => {
+  changeInput = (evt) => {
     this.setState({ filter: evt.target.value });
   };
 
-  deleteContact = id => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(el => el.id !== id),
+  deleteContact = (id) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter((el) => el.id !== id),
     }));
   };
 
@@ -54,7 +55,6 @@ class App extends Component {
 
     return (
       <>
-        
         <div className={s.myPhonebook}>
           <h2 className={s.bigHeader}>Моя телефонная книга</h2>
           <ContactForm onSubmit={this.handleSubmit} contacts={contacts} />
